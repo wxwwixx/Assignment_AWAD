@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'author',
+        'passwords' => 'authors',
     ],
 
     /*
@@ -46,10 +46,10 @@ return [
             'provider' => 'admins', 
         ], 
 
-        'author' => [ 
-            'driver' => 'session', 
-            'provider' => 'authors', 
-        ], 
+        'author' => [
+            'driver' => 'session',
+            'provider' => 'authors',
+        ],
     ],
 
     /*
@@ -80,10 +80,10 @@ return [
             'model' => App\Models\Admin::class, 
         ], 
  
-        'authors' => [ 
-            'driver' => 'eloquent', 
-            'model' => App\Models\Author::class, 
-        ], 
+        'authors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Author::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -107,6 +107,13 @@ return [
     */
 
     'passwords' => [
+
+        'authors' => [
+            'provider' => 'authors',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],        
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',

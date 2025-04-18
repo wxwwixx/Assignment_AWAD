@@ -42,7 +42,7 @@ class LoginController extends Controller
     }
     public function showAdminLoginForm() 
     { 
-        return view('auth.login', ['url' => 'admin']); 
+        return view('auth.login', ['url' => 'admin']);
     } 
  
     public function adminLogin(Request $request) 
@@ -73,10 +73,23 @@ class LoginController extends Controller
         ]); 
  
         if (Auth::guard('author')->attempt(['email' => $request->email, 
-'password' => $request->password], $request->get('remember'))) { 
+            'password' => $request->password], $request->get('remember'))) { 
  
             return redirect()->intended('/author'); 
         } 
         return back()->withInput($request->only('email', 'remember')); 
     } 
+    public function logout(Request $request)
+    {
+        if (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        } elseif (Auth::guard('author')->check()) {
+            Auth::guard('author')->logout();
+        }
+        
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect()->route('cincai'); // Redirect to the login page
+    }
 } 

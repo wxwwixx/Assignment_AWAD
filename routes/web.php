@@ -24,12 +24,13 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('cincai');
+})->name('cincai');
 Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm'])->name('admin.login');
 Route::get('/login/author', [LoginController::class, 'showAuthorLoginForm'])->name('author.login');
 Route::post('/login/admin', [LoginController::class, 'adminLogin'])->name('admin.login.submit');
 Route::post('/login/author', [LoginController::class, 'authorLogin'])->name('author.login.submit');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register/admin', [RegisterController::class, 'showAdminRegisterForm'])->name('admin.register');
 Route::get('/register/author', [RegisterController::class, 'showAuthorRegisterForm'])->name('author.register');
@@ -44,9 +45,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
      
     Route::view('/admin', 'admin'); 
 }); 
- 
-Route::get('logout', [LoginController::class,'logout']); 
-
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
@@ -68,3 +66,7 @@ Route::put('/projects/{project}/milestones/{milestone}', [MilestoneController::c
 
 Route::get('/milestones/{milestone}/payment', [PaymentController::class, 'create'])->name('payment.create');
 Route::post('/milestones/{milestone}/payment', [PaymentController::class, 'store'])->name('payment.store');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
