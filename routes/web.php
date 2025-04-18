@@ -36,6 +36,18 @@ Route::get('/register/author', [RegisterController::class, 'showAuthorRegisterFo
 Route::post('/register/admin', [RegisterController::class, 'createAdmin'])->name('admin.register.submit');
 Route::post('/register/author', [RegisterController::class, 'createAuthor'])->name('author.register.submit');
 
+Route::group(['middleware' => 'auth:author'], function () { 
+    Route::view('/author', 'author'); 
+}); 
+ 
+Route::group(['middleware' => 'auth:admin'], function () { 
+     
+    Route::view('/admin', 'admin'); 
+}); 
+ 
+Route::get('logout', [LoginController::class,'logout']); 
+
+
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
 Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
@@ -46,9 +58,6 @@ Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->nam
 
 Route::get('/projects/{project}/bids/create', [BidController::class, 'create'])->name('bids.create');
 Route::post('/projects/{project}/bids', [BidController::class, 'store'])->name('bids.store');
-
-Route::get('/register', [UserController::class,'create'])->name('users.create');
-Route::post('/register', [UserController::class, 'store'])->name('users.store');
 
 Route::get('/projects/{project}/milestones/create', [MilestoneController::class, 'create'])->name('milestones.create');
 Route::post('projects/{project}/milestones', [MilestoneController::class,'store'])->name('milestones.store');

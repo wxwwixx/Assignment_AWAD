@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.auth')
  
 @section('content') 
 <div class="container"> 
@@ -6,9 +6,8 @@
         <div class="col-md-8"> 
             <div class="card"> 
                 <div class="card-header">Dashboard</div> 
- 
                 <div class="card-body"> 
-                     Welcome to CodeFlex’s Web Application. 
+                    You must be the priviledged administrator of this site! 
                 </div> 
             </div> 
         </div> 

@@ -58,7 +58,8 @@ role="alert">
                             <div class="col-md-6 offset-md-4"> 
                                 <div class="form-check"> 
                                     <input class="form-check-input" 
-type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> 
+type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : 
+'' }}> 
  
                                     <label class="form-check-label" 
 for="remember"> 
@@ -88,4 +89,4 @@ href="{{ route('password.request') }}">
         </div> 
     </div> 
 </div> 
-@endsection
+@endsection 
